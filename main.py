@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import Flask, render_template, flash, url_for
 from flask_bootstrap import Bootstrap5
 from werkzeug.utils import redirect
-
+from dotenv import load_dotenv
 from form import MainForm
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
@@ -12,16 +12,17 @@ from sqlalchemy import Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy import Integer, String, Text, Column, ForeignKey, Boolean
 from send_message import Email
+import os
 class Base(DeclarativeBase):
   pass
-
+load_dotenv()
 db = SQLAlchemy(model_class=Base)
 app = Flask(__name__)
-app.secret_key = "#python143"
+app.secret_key = os.environ.get("SECRET_KEY")
 bootstrap = Bootstrap5(app)
-app.config['SECRET_KEY'] = '#prince143'
+app.config['SECRET_KEY'] = os.environ.get("FLASK_KEY")
 # configure the SQLite database, relative to the app instance folder
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
+app.config["SQLALCHEMY_DATABASE_URI"] =os.environ.get('DB_URI', "sqlite:///data.db")
 # initialize the app with the extension
 db.init_app(app)
 
