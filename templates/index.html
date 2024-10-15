@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Registration Form</title>
+    <!-- Add CSS stylesheet reference -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .success {
+        color: green;
+        text-align : centre;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+
+
+    }
+    .danger {
+        color: red;
+        text-align : centre;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+
+    }
+    </style>
+</head>
+<body>
+
+
+
+<div class="form-container">
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <h4 class="{{ category }}">{{ message }}</h4>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <h2>Vehicle Registration Form</h2>
+
+        <div class="form-group">
+            {{ form.vehicle_Type.label }}
+            {{ form.vehicle_Type(class_="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.vehicle_no.label }}
+            {{ form.vehicle_no(class_="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.vehicle_model.label }}
+            {{ form.vehicle_model(class_="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.register_owner.label }}
+            {{ form.register_owner(class_="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.current_owner.label }}
+            {{ form.current_owner(class_="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.phone_number.label }}
+            {{ form.phone_number(class_="form-control") }}
+        </div>
+
+        <!-- Pollution Section -->
+        <div class="form-group">
+            {{ form.pollution.label }}
+            {{ form.pollution(class_="form-control",id="pollution") }}
+        </div>
+
+        <!-- Pollution Expiration and Price, hidden initially -->
+        <div id="pollution-fields" style="display:none;">
+            <div class="form-group">
+                {{ form.pollution_expire.label }}
+                {{ form.pollution_expire(class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.pollution_price.label }}
+                {{ form.pollution_price(class_="form-control") }}
+            </div>
+        </div>
+
+        <!-- Insurance Section -->
+        <div class="form-group">
+            {{ form.insurance.label }}
+            {{ form.insurance(class_="form-control",id="insurance") }}
+        </div>
+
+        <!-- Insurance Expiration and Price, hidden initially -->
+        <div id="insurance-fields" style="display:none;">
+            <div class="form-group">
+                {{ form.insurance_expire.label }}
+                {{ form.insurance_expire(class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.policy_number.label }}
+                {{ form.policy_number(class_="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.insurance_price.label }}
+                {{ form.insurance_price(class_="form-control") }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.submit(class_="btn-submit") }}
+        </div>
+    </form>
+</div>
+
+<script>
+    // JavaScript to toggle pollution fields
+    document.querySelectorAll('input[name="pollution"]').forEach((el) => {
+        el.addEventListener('change', function() {
+            var pollutionFields = document.getElementById('pollution-fields');
+            if (this.value === 'Yes') {
+                pollutionFields.style.display = 'block';
+            } else {
+                pollutionFields.style.display = 'none';
+            }
+        });
+    });
+
+    // JavaScript to toggle insurance fields
+    document.querySelectorAll('input[name="insurance"]').forEach((el) => {
+        el.addEventListener('change', function() {
+            var insuranceFields = document.getElementById('insurance-fields');
+            if (this.value === 'Yes') {
+                insuranceFields.style.display = 'block';
+            } else {
+                insuranceFields.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

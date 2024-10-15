@@ -1,0 +1,144 @@
+/* Global styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f8;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Form container styling */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form title */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Labels styling */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Input, Select, and Radio styling */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+}
+
+/* Button styling */
+.btn-submit {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+/* Form field sections that are conditionally hidden */
+#pollution-fields, #insurance-fields {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+To change the color of the bullet (radio button) in a RadioField in Flask-WTF, you can use custom CSS and override the default styling of radio buttons.
+
+HTML radio buttons are limited in terms of direct styling, so typically we hide the default radio button and replace it with a styled element that can be customized. Here's how to achieve that:
+
+Step 1: Modify Your HTML to Add CSS Classes
+In your form template, ensure that each radio button has a custom class to target for CSS.
+
+html
+Copy code
+<div class="form-group">
+    {{ form.pollution.label }}
+    <div class="custom-radio">
+        {{ form.pollution(class_="custom-radio-input") }}
+    </div>
+</div>
+/* Hide the default radio input */
+.custom-radio-input input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+/* Create a custom radio button */
+.custom-radio-input label {
+    position: relative;
+    padding-left: 35px;
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Custom radio button circle */
+.custom-radio-input label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff; /* Default border color */
+    border-radius: 50%;
+    background-color: white;
+}
+
+/* Change the bullet color when checked */
+.custom-radio-input input[type="radio"]:checked + label:before {
+    background-color: #007bff; /* Change the background color when selected */
+    border-color: #007bff; /* Border color when selected */
+}
+
+/* Create the inner dot for checked radio button */
+.custom-radio-input input[type="radio"]:checked + label:after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+}
+#insurance,#pollution{
+
+    color: white;
+}
