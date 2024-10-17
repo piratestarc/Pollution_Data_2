@@ -18,7 +18,8 @@ class Base(DeclarativeBase):
 load_dotenv()
 db = SQLAlchemy(model_class=Base)
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY")
+app.secret_key = os.environ.get("SECRET_KEY"
+                                "")
 bootstrap = Bootstrap5(app)
 app.config['SECRET_KEY'] = os.environ.get("FLASK_KEY")
 # configure the SQLite database, relative to the app instance folder
@@ -205,4 +206,4 @@ def email():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True,port=5000)
